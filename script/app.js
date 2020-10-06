@@ -11,11 +11,7 @@ function handlePasswordSwitcher() {
     passwordToggleInput = document.querySelector('.js-password-toggle');
 
     passwordToggleInput.addEventListener("click", function() {
-        if (passwordToggleInput.checked) {
-            passwordInput.type = "text";
-        }   else {
-            passwordInput.type = "password";
-        }
+        passwordInput.type = (passwordToggleInput.checked) ? "text" : "password";
     });
 }
 

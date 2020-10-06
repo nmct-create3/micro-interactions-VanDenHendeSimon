@@ -5,13 +5,13 @@
 @font-face {
     font-family: "Inter Web";
     font-weight: 400;
-    src: url("../fonts/Inter-Regular.woff2") format("woff2")
+    src: url("../fonts/Inter-Regular.woff2") format("woff2");
 }
 
 @font-face {
     font-family: "Inter Web";
     font-weight: 600;
-    src: url("../fonts/Inter-SemiBold.woff2") format("woff2")
+    src: url("../fonts/Inter-SemiBold.woff2") format("woff2");
 }
 
 /*------------------------------------*\
@@ -20,15 +20,15 @@
 
 :root {
     /* Global colors */
-    --global-color-alpha-light: #4F95FF;
-    --global-color-alpha: #3385FF;
-    --global-color-alpha-dark: #2E77E6;
-    --global-color-alpha-x-dark: #1B4186;
+    --global-color-alpha-light: #4f95ff;
+    --global-color-alpha: #3385ff;
+    --global-color-alpha-dark: #2e77e6;
+    --global-color-alpha-x-dark: #1b4186;
     --global-color-alpha-transparent: #3385ffbf;
     --global-color-alpha-x-transparent: #3385ff4d;
 
-    --global-color-neutral-xxxx-light: #F5F6FA;
-    --global-color-neutral-xxx-light: #E2E3E7;
+    --global-color-neutral-xxxx-light: #f5f6fa;
+    --global-color-neutral-xxx-light: #e2e3e7;
     --global-color-neutral-xx-light: #caccd4;
     --global-color-neutral-x-light: #b5b6c0;
     --global-color-neutral-light: #a0a1ad;
@@ -42,17 +42,17 @@
     /* global page settings */
     --global-html-color: var(--global-color-neutral-xxxx-dark);
     --global-html-backgroundColor: var(--global-color-neutral-xxxx-light);
-    --global-selection-backgroundColor: var(--global-color-alpha);    
+    --global-selection-backgroundColor: var(--global-color-alpha);
 
     /* borders */
     --global-borderRadius: 3px;
     --global-borderWidth: 1px;
 
     /* transitions */
-    --global-transitionTiming-alpha: .1s ease-out;
+    --global-transitionTiming-alpha: 0.1s ease-out;
 
     /* Baseline settings */
-    --global-baseline: 8px;         
+    --global-baseline: 8px;
     --global-whitespace: calc(var(--global-baseline) * 3); /* = 24px */
 
     --global-whitespace-xs: calc(var(--global-baseline) / 2); /* = 4px */
@@ -69,8 +69,11 @@
     --global-input-borderColor: var(--global-color-neutral-xxx-light);
     --global-input-hover-borderColor: var(--global-color-neutral-xx-light);
     --global-input-focus-borderColor: var(--global-color-alpha);
-    --global-input-focus-boxShadowColor: var(--global-color-alpha-x-transparent);
-    --global-input-focus-boxShadow: 0 0 0 3px var(--global-input-focus-boxShadowColor);
+    --global-input-focus-boxShadowColor: var(
+        --global-color-alpha-x-transparent
+    );
+    --global-input-focus-boxShadow: 0 0 0 3px
+        var(--global-input-focus-boxShadowColor);
 }
 
 /*------------------------------------*\
@@ -567,7 +570,7 @@ input::placeholder {
     background-color: var(--card-backgroundColor);
     margin-bottom: var(--global-whitespace);
     border-radius: var(--card-borderRadius);
-    box-shadow: 0 0 0 1px rgba(0,0,0, 0.05), 0 2px 4px rgba(0,0,0,.075);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.075);
     overflow: hidden;
 }
 
@@ -578,7 +581,7 @@ input::placeholder {
     overflow: auto; /* Fix margin collapse */
 }
 
-.c-card__footer {   
+.c-card__footer {
     text-align: center;
     border-top: 1px solid var(--card__footer-borderColor);
 }
@@ -592,7 +595,8 @@ input::placeholder {
 
 @media (min-width: 27em) {
     .c-card__body {
-        padding: var(--global-whitespace-xl) var(--global-whitespace-xl) var(--global-whitespace);
+        padding: var(--global-whitespace-xl) var(--global-whitespace-xl)
+            var(--global-whitespace);
     }
 
     .c-card__title {
@@ -617,21 +621,24 @@ input::placeholder {
     Class to put on all input="text" like form inputs
 */
 
-.c-input {       
+.c-input {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     width: 100%;
-    border: 1px solid var(--global-input-borderColor);
+    border: var(--global-borderWidth) solid
+        var(--input-borderColor, var(--global-input-borderColor));
     border-radius: var(--global-borderRadius);
     background-color: var(--global-input-backgroundColor);
     color: var(--global-input-color);
     font-family: inherit;
     font-size: 16px;
     line-height: calc(var(--global-baseline) * 3);
-    padding: calc(var(--global-baseline) * 1.5 - var(--global-borderWidth)) var(--global-whitespace-md);
+    padding: calc(var(--global-baseline) * 1.5 - var(--global-borderWidth))
+        var(--global-whitespace-md);
     outline: none;
-    transition: border var(--global-transition-timing-alpha), box-shadow var(--global-transition-timing-alpha);
+    transition: border var(--global-transition-timing-alpha),
+        box-shadow var(--global-transition-timing-alpha);
 }
 
 .c-input:hover {
@@ -671,7 +678,7 @@ more padding on the right to avoid overlap
     padding-bottom: var(--global-whitespace-sm);
     font-size: 14px;
     line-height: 16px;
-    color: var(--label-color);
+    color: var(--label-color, var(--global-color-neutral-xx-dark));
 }
 
 .c-label--option {
@@ -684,15 +691,15 @@ more padding on the right to avoid overlap
     Class to put on form buttons or
 */
 
-.c-button {    
+.c-button {
     --button-borderColor: var(--global-color-alpha-dark);
     --button-hover-borderColor: var(--global-color-alpha-dark);
     --button-active-borderColor: var(--global-color-alpha-dark);
-    --button-focus-borderColor:var(--global-color-alpha-dark);
+    --button-focus-borderColor: var(--global-color-alpha-dark);
     --button-backgroundColor: var(--global-color-alpha);
     --button-hover-backgroundColor: var(--global-color-alpha-light);
     --button-active-backgroundColor: var(--global-color-alpha-dark);
-    --button-focus-backgroundColor: var(--global-color-alpha);    
+    --button-focus-backgroundColor: var(--global-color-alpha);
     --button-focus-boxShadow: var(--global-input-focus-boxShadow);
     font-size: 16px;
     font-weight: 600;
@@ -701,11 +708,13 @@ more padding on the right to avoid overlap
     background-color: var(--button-backgroundColor);
     color: #fff;
     line-height: calc(var(--global-baseline) * 3);
-    padding: calc(var(--global-baseline) * 1.5 - var(--global-borderWidth)) var(--global-whitespace-md);
+    padding: calc(var(--global-baseline) * 1.5 - var(--global-borderWidth))
+        var(--global-whitespace-md);
     width: 100%;
     outline: none;
     box-shadow: var(--button-boxShadow, 0);
-    transition: all var(--global-transitionTiming-alpha) var(--global-transitionEasing-out);
+    transition: all var(--global-transitionTiming-alpha)
+        var(--global-transitionEasing-out);
 }
 
 .c-button:hover {
@@ -759,9 +768,11 @@ more padding on the right to avoid overlap
     height: var(--global-whitespace-md);
     margin-right: var(--global-whitespace-sm);
     background: var(--global-input-backgroundColor);
-    border: var(--global-borderWidth) solid var(--custom-option-borderColor, var(--global-input-borderColor));
+    border: var(--global-borderWidth) solid
+        var(--custom-option-borderColor, var(--global-input-borderColor));
     box-shadow: var(--custom-option-boxShadow, 0);
-    transition: border var(--global-transitionTiming-alpha), box-shadow var(--global-transitionTiming-alpha);
+    transition: border var(--global-transitionTiming-alpha),
+        box-shadow var(--global-transitionTiming-alpha);
 }
 
 .c-custom-option__fake-input--checkbox {
@@ -775,8 +786,9 @@ more padding on the right to avoid overlap
 .c-custom-option__symbol {
     display: block;
     opacity: 0; /* Hide the symbol initially */
-    transform: scale(.5);
-    transition: transform var(--global-transitionTiming-alpha), opacity var(--global-transitionTiming-alpha);
+    transform: scale(0.5);
+    transition: transform var(--global-transitionTiming-alpha),
+        opacity var(--global-transitionTiming-alpha);
 }
 
 .c-custom-option__fake-input--checkbox .c-custom-option__symbol {
@@ -857,7 +869,8 @@ more padding on the right to avoid overlap
     margin-right: var(--global-whitespace-md);
     background-color: var(--toggle-backgroundColor);
     border-radius: 32px;
-    border: var(--global-borderWidth) solid var(--toggle-borderColor, var(--global-input-borderColor));
+    border: var(--global-borderWidth) solid
+        var(--toggle-borderColor, var(--global-input-borderColor));
     transition: all var(--global-transitionTiming-alpha);
     box-shadow: var(--toggle-boxShadow, 0);
 }
@@ -869,11 +882,11 @@ more padding on the right to avoid overlap
 .c-custom-toggle__fake-input::after {
     position: relative;
     display: block;
-    content: '';
+    content: "";
     height: 22px;
     width: 22px;
     border-radius: 22px;
-    box-shadow: 0 1px 3px 1px rgba(0,0,0,.2);
+    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.2);
     background-color: var(--toggle__switch-backgroundColor);
     transition: var(--toggle__switch-transition);
 }
@@ -891,20 +904,28 @@ more padding on the right to avoid overlap
 .c-option--hidden:checked + .c-custom-toggle {
     --toggle-backgroundColor: var(--toggle-checked-backgroundColor);
     --toggle-borderColor: var(--toggle-checked-borderColor);
-    --toggle__switch-backgroundColor: var(--toggle__switch-checked-backgroundColor);    
+    --toggle__switch-backgroundColor: var(
+        --toggle__switch-checked-backgroundColor
+    );
 }
 
-.c-option--hidden:checked + .c-custom-toggle .c-custom-toggle__fake-input::after {
-    transform: translate(24px,0);
+.c-option--hidden:checked
+    + .c-custom-toggle
+    .c-custom-toggle__fake-input::after {
+    transform: translate(24px, 0);
 }
 
 /* special active state */
 
-.c-option--hidden:active + .c-custom-toggle .c-custom-toggle__fake-input::after {
+.c-option--hidden:active
+    + .c-custom-toggle
+    .c-custom-toggle__fake-input::after {
     width: 28px;
 }
 
-.c-option--hidden:active:checked + .c-custom-toggle .c-custom-toggle__fake-input::after {
+.c-option--hidden:active:checked
+    + .c-custom-toggle
+    .c-custom-toggle__fake-input::after {
     margin-left: -6px;
 }
 
@@ -913,7 +934,6 @@ more padding on the right to avoid overlap
     ---
     Custom select dropdown
 */
-
 
 .c-custom-select {
     display: block;
@@ -942,7 +962,10 @@ more padding on the right to avoid overlap
 
     --password-toggle-iconSize: 20px;
     --password-toggle-whitespace: var(--global-whitespace-sm);
-    --password-toggle-containerSize: calc(var(--password-toggle-iconSize) + calc(var(--password-toggle-whitespace) * 2));
+    --password-toggle-containerSize: calc(
+        var(--password-toggle-iconSize) +
+            calc(var(--password-toggle-whitespace) * 2)
+    );
 }
 
 .c-password-toggle__label {
@@ -971,6 +994,10 @@ more padding on the right to avoid overlap
     cursor: pointer;
 }
 
+.c-password-toggle__icon:hover {
+    fill: var(--global-color-neutral-x-dark);
+}
+
 .c-password-toggle__icon--hidden {
     display: none;
 }
@@ -978,6 +1005,11 @@ more padding on the right to avoid overlap
 /*------------------------------------*\
 #UTILITIES
 \*------------------------------------*/
+
+.has-error {
+    --label-color: var(--global-color-error);
+    --input-borderColor: var(--global-input-error-borderColor);
+}
 
 /*
     Utilities: color
@@ -1052,7 +1084,6 @@ more padding on the right to avoid overlap
 .u-max-width-none {
     max-width: none !important;
 }
-
 
 /*
     Utilities: align

@@ -956,49 +956,52 @@ more padding on the right to avoid overlap
     Password toggle custom checkbox
 */
 
-.c-password-toggle {
-    position: relative;
+.c-password-toggle-container {
     display: block;
+    position: relative;
 
-    --password-toggle-iconSize: 20px;
-    --password-toggle-whitespace: var(--global-whitespace-sm);
-    --password-toggle-containerSize: calc(
-        var(--password-toggle-iconSize) +
-            calc(var(--password-toggle-whitespace) * 2)
-    );
+    --c-password-toggle-iconSize: 24px;
+    --c-password-toggle-whiteSpace: var(--global-whitespace-sm);
 }
 
-.c-password-toggle__label {
-    position: relative;
+.c-toggle-password {
+    display: block;
+    position: absolute;
+
+    top: 0;
+    right: 0;
+    /* bottom:0 neemt automatisch hele container hoogte aan */
+    bottom: 0;
 }
 
 .c-password-toggle__input {
-    padding-right: var(--password-toggle-containerSize);
+    padding-right: calc(var(--c-password-toggle-iconSize) + calc(var(--c-password-toggle-whiteSpace) * 2))
 }
 
-.c-password-toggle__icons {
-    position: absolute;
-    right: var(--password-toggle-whitespace);
-    top: 50%;
-    transform: translateY(-50%);
-
-    width: var(--password-toggle-iconSize);
-    height: var(--password-toggle-iconSize);
-}
-
-.c-password-toggle__icon {
-    width: 100%;
+.c-password-toggle__label {
     height: 100%;
-    fill: var(--global-color-neutral-light);
+    display: flex;
+
+    align-items: center;
+    padding: 0 var(--c-password-toggle-whiteSpace);
 
     cursor: pointer;
 }
 
-.c-password-toggle__icon:hover {
-    fill: var(--global-color-neutral-x-dark);
+.c-password-toggle__icon {
+    width: var(--c-password-toggle-iconSize);
+    fill: var(--global-color-neutral-light);
 }
 
-.c-password-toggle__icon--hidden {
+.c-password-toggle__icon--hide {
+    display: none;
+}
+
+.c-toggle-password__checkbox:checked + .c-password-toggle__label .c-password-toggle__icon--hide {
+    display: block;
+}
+
+.c-toggle-password__checkbox:checked + .c-password-toggle__label .c-password-toggle__icon--show {
     display: none;
 }
 

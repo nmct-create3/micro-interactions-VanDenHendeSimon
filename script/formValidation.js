@@ -40,6 +40,7 @@ const doubleCheckEmailAddress = function() {
         removeErrors(email);
         removeEmailInputEventListener();
     }   else {
+        // HERE
         email.errorMessage = isEmpty(email.field.value) ? "This field is required" : "Invalid email";
     }
 }

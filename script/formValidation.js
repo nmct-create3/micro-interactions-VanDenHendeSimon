@@ -105,8 +105,15 @@ const enableListeners = function () {
         }
     });
 
-    signInButton.addEventListener("click", function () {
-        console.log("button clicked");
+    signInButton.addEventListener("click", function (e) {
+        // Prevent submission
+        e.preventDefault();
+
+        // Client side validation
+        if (isValidEmailAddress(email.input.value) && isValidPassword(password.input.value)) {
+            console.log("Email: " + email.input.value);
+            console.log("Password: " + password.input.value);
+        }
     });
 };
 

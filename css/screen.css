@@ -614,6 +614,14 @@ input::placeholder {
     align-items: center;
 }
 
+.c-form-field--floating {
+    position: relative;
+}
+
+.c-form-field:focus-within .c-label--floating {
+    transform: translateY(-24px);
+}
+
 /*
     Component: Input
     ---
@@ -681,6 +689,22 @@ more padding on the right to avoid overlap
 
 .c-label--option {
     padding-bottom: 0;
+}
+
+.c-label--floating {
+    position: absolute;
+    top: 12px;
+    left: 8px;
+    padding: 4px 8px;
+    will-change: transform;
+    transform: translateY(0);
+    transition: transform 200ms ease-in-out;
+    box-shadow: 0 0 4px 4px rgba(255, 255, 255, 0.8);
+    background: white;
+}
+
+.is-floating {
+    transform: translateY(-24px);
 }
 
 /*

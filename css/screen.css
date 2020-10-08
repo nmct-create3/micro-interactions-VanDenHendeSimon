@@ -53,6 +53,7 @@
 
     /* transitions */
     --global-transitionTiming-alpha: 0.1s ease-out;
+    --global-transitionTiming-slow: 0.3s ease-out;
 
     /* Baseline settings */
     --global-baseline: 8px;
@@ -791,6 +792,8 @@ more padding on the right to avoid overlap
     border: var(--global-borderWidth) solid var(--custom-option-borderColor, var(--global-input-borderColor));
     box-shadow: var(--custom-option-boxShadow, 0);
     transition: border var(--global-transitionTiming-alpha), box-shadow var(--global-transitionTiming-alpha);
+
+    cursor: pointer;
 }
 
 .c-custom-option__fake-input--checkbox {
@@ -799,6 +802,12 @@ more padding on the right to avoid overlap
 
 .c-custom-option__fake-input--radio {
     border-radius: 100%;
+}
+
+.c-custom-option__fake-input--like {
+    width: 24px;
+    border: none;
+    box-shadow: none;
 }
 
 .c-custom-option__symbol {
@@ -1011,6 +1020,21 @@ more padding on the right to avoid overlap
 
 .c-toggle-password__checkbox:checked + .c-password-toggle__label .c-password-toggle__icon--show {
     display: none;
+}
+
+.c-like__symbol {
+    width: 24px;
+    fill: var(--global-color-neutral-x-light);
+    transition: fill var(--global-transitionTiming-slow), transform var(--global-transitionTiming-slow);
+}
+
+.c-like__symbol:active {
+    width: 22px;
+}
+
+.c-like:checked + .c-label .c-like__symbol {
+    fill: #d80027;
+    transform: rotate(360deg);
 }
 
 /*------------------------------------*\

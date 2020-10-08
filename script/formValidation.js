@@ -4,46 +4,16 @@ let email = {},
     signInButton;
 
 const getDOMElements = function () {
-    email.field = document.getElementById("username");
-    password.field = document.getElementById("password");
+    email.field = document.querySelector(".js-username");
+    email.input = document.getElementById("username");
+    email.errorMessage = document.querySelector(".js-email-error-message");
+
+    password.field = document.querySelector(".js-password");
+    password.input = document.getElementById("password");
+    password.errorMessage = document.querySelector(".js-password-error-message");
+
     signInButton = document.querySelector(".js-sign-in-button");
 };
-
-const addErrors = function (elementObject) {
-    console.log("adding errors");
-    console.log(elementObject.field);
-    elementObject.field.classList.add("has-error");
-};
-
-const addEmailInputEventListener = function () {
-    email.field.addEventListener("input", doubleCheckEmailAddress);
-};
-
-const addPasswordInputEventListener = function () {
-    password.field.addEventListener("input", doubleCheckPassword);
-};
-
-const removeEmailInputEventListener = function () {
-    email.field.removeEventListener("input", doubleCheckEmailAddress);
-};
-
-const removePasswordInputEventListener = function () {
-    password.field.removeEventListener("input", doubleCheckPassword);
-};
-
-const removeErrors = function (elementObject) {
-    elementObject.field.classList.remove("has-error");
-};
-
-const doubleCheckEmailAddress = function() {
-    if (isValidEmailAddress(email.field.value)) {
-        removeErrors(email);
-        removeEmailInputEventListener();
-    }   else {
-        // HERE
-        email.errorMessage = isEmpty(email.field.value) ? "This field is required" : "Invalid email";
-    }
-}
 
 const isValidEmailAddress = function (emailAddress) {
     // Basis manier om e-mailadres te checken.
@@ -59,24 +29,80 @@ const isEmpty = function (fieldValue) {
     return !fieldValue || !fieldValue.length;
 };
 
-const enableListeners = function () {
-    email.field.addEventListener("blur", function () {
-        if (!isValidEmailAddress(email.field.value)) {
-            console.log("email is invalid");
-            if (!isEmpty(email.field.value)) {
-                email.errorMessage = "Invalid email address";
-            } else {
-                console.log("email is empty");
-                email.errorMessage = "This field is required";
-            }
+const addErrors = function (elementObject, errorMessage) {
+    elementObject.field.classList.add("has-error");
 
-            addErrors(email);
-            addInputEventListener(email);
+    elementObject.errorMessage.innerHTML = errorMessage;
+    // TODO: Met een class ipv zo display te zetten
+    elementObject.errorMessage.style.display = "block";
+};
+
+const removeErrors = function (elementObject) {
+    elementObject.field.classList.remove("has-error");
+
+    // TODO: Met een class ipv zo display te zetten
+    elementObject.errorMessage.style.display = "none";
+};
+
+const doubleCheckEmailAddress = function () {
+    if (isValidEmailAddress(email.input.value)) {
+        // Het is geldig
+        removeErrors(email);
+        email.input.removeEventListener("input", doubleCheckEmailAddress);
+    } else {
+        // Invalid email address
+        if (isEmpty(email.input.value)) {
+            // Als het leeg is weer efkes alles eraf te halen,
+            // tenzij ge uit het veld klikt, dan firet blur opnieuw en komt de error er weer op
+            removeErrors(email);
+            email.input.removeEventListener("input", doubleCheckEmailAddress);
+        } else {
+            addErrors(email, "Invalid email address");
+        }
+    }
+};
+
+const doubleCheckPassword = function () {
+    if (isValidPassword(password.input.value)) {
+        // Het is geldig
+        removeErrors(password);
+        password.input.removeEventListener("input", doubleCheckPassword);
+    } else {
+        // Invalid email address
+        if (isEmpty(password.input.value)) {
+            // Als het leeg is weer efkes alles eraf te halen,
+            // tenzij ge uit het veld klikt, dan firet blur opnieuw en komt de error er weer op
+            removeErrors(password);
+            password.input.removeEventListener("input", doubleCheckPassword);
+        } else {
+            addErrors(password, "Invalid password");
+        }
+    }
+};
+
+const enableListeners = function () {
+    email.input.addEventListener("blur", function () {
+        if (isEmpty(email.input.value)) {
+            addErrors(email, "This field is required");
+            email.input.addEventListener("input", doubleCheckEmailAddress);
+        } else {
+            if (!isValidEmailAddress(email.input.value)) {
+                addErrors(email, "Invalid email address");
+                email.input.addEventListener("input", doubleCheckEmailAddress);
+            }
         }
     });
 
-    password.field.addEventListener("blur", function () {
-        console.log("password blur");
+    password.input.addEventListener("blur", function () {
+        if (isEmpty(password.input.value)) {
+            addErrors(password, "This field is required");
+            password.input.addEventListener("input", doubleCheckPassword);
+        } else {
+            if (!isValidPassword(password.input.value)) {
+                addErrors(password, "Invalid password");
+                password.input.addEventListener("input", doubleCheckPassword);
+            }
+        }
     });
 
     signInButton.addEventListener("click", function () {
